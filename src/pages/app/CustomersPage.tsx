@@ -1,89 +1,182 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import AddCustomerDialog from "@/components/customers/AddCustomerDialog";
 import {
-  Plus, Search, Filter, MoreHorizontal, Eye, Edit, Trash2,
-  Building2, Mail, Phone, Globe, ChevronLeft, ChevronRight,
-  Users, CheckCircle2,
-} from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+  Plus,
+  Search,
+  Filter,
+  MoreHorizontal,
+  Eye,
+  Edit,
+  Trash2,
+  Building2,
+  Mail,
+  Phone,
+  Globe,
+  ChevronLeft,
+  ChevronRight,
+  Users,
+  CheckCircle2,
+} from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import {
-  DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { PageHeader } from '@/components/shared/PageHeader';
-import { EmptyState } from '@/components/shared/EmptyState';
-import { mockCustomers } from '@/lib/mock-data';
-import type { Customer } from '@/types';
-import { cn } from '@/lib/utils';
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+
+import { PageHeader } from "@/components/shared/PageHeader";
+import { EmptyState } from "@/components/shared/EmptyState";
+
+import { getCustomers } from "@/services/customerService";
+
+import type { Customer } from "@/types";
+
+import { cn } from "@/lib/utils";
 
 const ITEMS_PER_PAGE = 5;
 
 const tierStyles: Record<string, string> = {
-  enterprise: 'bg-primary/10 text-primary border-primary/20',
-  business: 'bg-success/10 text-success border-success/20',
-  starter: 'bg-muted text-muted-foreground border-border',
+  enterprise: "bg-primary/10 text-primary border-primary/20",
+  business: "bg-success/10 text-success border-success/20",
+  starter: "bg-muted text-muted-foreground border-border",
 };
 
 const statusStyles: Record<string, string> = {
-  active: 'bg-success/10 text-success border-success/20',
-  inactive: 'bg-muted text-muted-foreground border-border',
-  pending: 'bg-warning/10 text-warning-foreground border-warning/20',
+  active: "bg-success/10 text-success border-success/20",
+  inactive: "bg-muted text-muted-foreground border-border",
+  pending: "bg-warning/10 text-warning-foreground border-warning/20",
 };
 
 export default function CustomersPage() {
-  const [search, setSearch] = useState('');
-  const [page, setPage] = useState(1);
-  const [selected, setSelected] = useState<Customer | null>(null);
+  const [customers, setCustomers] = useState<Customer[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const filtered = mockCustomers.filter(c =>
-    c.name.toLowerCase().includes(search.toLowerCase()) ||
-    c.company.toLowerCase().includes(search.toLowerCase()) ||
-    c.email.toLowerCase().includes(search.toLowerCase())
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+
+  const [selected, setSelected] = useState<Customer | null>(null);
+  const [openAddDialog, setOpenAddDialog] = useState(false);
+
+  useEffect(() => {
+    loadCustomers();
+  }, []);
+
+  async function loadCustomers() {
+  try {
+    console.log("loadCustomers called");
+
+    setLoading(true);
+
+    const data = await getCustomers();
+
+    console.log("SUPABASE DATA:", data);
+
+    setCustomers(data);
+  } catch (error) {
+    console.error("Customer Error:", error);
+  } finally {
+    setLoading(false);
+  }
+}
+
+  const filtered = customers.filter(
+    (c) =>
+      c.name.toLowerCase().includes(search.toLowerCase()) ||
+      c.company.toLowerCase().includes(search.toLowerCase()) ||
+      c.email.toLowerCase().includes(search.toLowerCase())
   );
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
-  const paged = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
+
+  const paged = filtered.slice(
+    (page - 1) * ITEMS_PER_PAGE,
+    page * ITEMS_PER_PAGE
+  );
+
+  if (loading) {
+    return (
+      <div className="p-6 text-center text-muted-foreground">
+        Loading customers...
+      </div>
+    );
+  }
 
   return (
     <div className="p-6 space-y-6">
       <PageHeader
-        title="Customers"
-        subtitle={`${mockCustomers.length} enterprise customers registered`}
-        icon={<Users className="size-5" />}
-        actions={
-          <Button size="sm" className="gap-1.5">
-            <Plus className="size-4" />
-            Add Customer
-          </Button>
-        }
-      />
+  title="Customers"
+  subtitle={`${customers.length} enterprise customers registered`}
+  icon={<Users className="size-5" />}
+  actions={
+    <Button
+  size="sm"
+  className="gap-1.5"
+  onClick={() => setOpenAddDialog(true)}
+>
+      <Plus className="size-4" />
+      Add Customer
+    </Button>
+  }
+/>
 
       {/* Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {[
-          { label: 'Total', value: mockCustomers.length, color: 'text-foreground' },
-          { label: 'Active', value: mockCustomers.filter(c => c.status === 'active').length, color: 'text-success' },
-          { label: 'Enterprise', value: mockCustomers.filter(c => c.tier === 'enterprise').length, color: 'text-primary' },
-          { label: 'Pending', value: mockCustomers.filter(c => c.status === 'pending').length, color: 'text-warning-foreground' },
-        ].map((s, i) => (
-          <motion.div
-            key={s.label}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.05 }}
-          >
-            <Card>
-              <CardContent className="pt-4 pb-4">
-                <p className={cn('text-2xl font-bold', s.color)}>{s.value}</p>
-                <p className="text-sm text-muted-foreground">{s.label}</p>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </div>
+<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+  {[
+    {
+      label: "Total",
+      value: customers.length,
+      color: "text-foreground",
+    },
+    {
+      label: "Active",
+      value: customers.filter((c) => c.status === "active").length,
+      color: "text-success",
+    },
+    {
+      label: "Enterprise",
+      value: customers.filter((c) => c.tier === "enterprise").length,
+      color: "text-primary",
+    },
+    {
+      label: "Pending",
+      value: customers.filter((c) => c.status === "pending").length,
+      color: "text-warning-foreground",
+    },
+  ].map((s, i) => (
+    <motion.div
+      key={s.label}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: i * 0.05 }}
+    >
+      <Card>
+        <CardContent className="pt-4 pb-4">
+          <p className={cn("text-2xl font-bold", s.color)}>
+            {s.value}
+          </p>
+          <p className="text-sm text-muted-foreground">
+            {s.label}
+          </p>
+        </CardContent>
+      </Card>
+    </motion.div>
+  ))}
+</div>
 
       <Card>
         {/* Toolbar */}
@@ -285,7 +378,14 @@ export default function CustomersPage() {
             </Card>
           </motion.div>
         )}
-      </AnimatePresence>
+            </AnimatePresence>
+
+      <AddCustomerDialog
+        open={openAddDialog}
+        onClose={() => setOpenAddDialog(false)}
+        onSuccess={loadCustomers}
+      />
+
     </div>
   );
 }

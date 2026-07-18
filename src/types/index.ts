@@ -36,24 +36,30 @@ export interface Customer {
 
 export interface Asset {
   id: string;
-  customerId: string;
-  customerName: string;
-  name: string;
-  category: AssetCategory;
-  modelNumber: string;
-  serialNumber: string;
-  purchaseDate: string;
-  warrantyExpiry: string;
-  usageHours: number;
-  condition: AssetCondition;
-  lastMaintenance: string;
-  nextMaintenanceDue: string;
-  issueDescription?: string;
-  location: string;
-  firmware?: string;
-  status: 'operational' | 'maintenance' | 'offline' | 'warning';
-  createdAt: string;
-  updatedAt: string;
+
+  customer_id: string;
+
+  asset_name: string;
+
+  serial_number: string;
+
+  device_type: string;
+
+  installation_date: string;
+
+  warranty_end: string;
+
+  health_status: string;
+
+  created_at: string;
+
+  updated_at: string;
+
+  customers?: {
+    id: string;
+    name: string;
+    company: string;
+  };
 }
 
 export interface AIAnalysis {
@@ -180,4 +186,31 @@ export interface Report {
   scheduledFor?: string;
   size?: string;
   format: 'PDF' | 'CSV' | 'Excel';
+}
+
+export interface Ticket {
+  id: string;
+
+  asset_id: string;
+
+  title: string;
+
+  description: string;
+
+  priority: string;
+
+  status: string;
+
+  created_at: string;
+
+  updated_at: string;
+
+  assets?: {
+    id: string;
+    asset_name: string;
+    serial_number: string;
+    customers?: {
+      company: string;
+    };
+  };
 }
