@@ -23,7 +23,7 @@ export function AppLayout() {
 
       {/* Main content */}
       <motion.div
-        animate={{ marginLeft: sidebarCollapsed ? 64 : 240 }}
+        animate={{ marginLeft: sidebarCollapsed ? 64 : 280 }}
         transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
         className="flex-1 flex flex-col overflow-hidden"
       >

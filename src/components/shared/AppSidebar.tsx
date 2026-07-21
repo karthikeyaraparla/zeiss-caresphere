@@ -1,5 +1,5 @@
-import { NavLink, useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { NavLink, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutDashboard,
   Users,
@@ -13,26 +13,90 @@ import {
   LogOut,
   Microscope,
   ChevronRight,
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { useAuth } from '@/contexts/AuthContext';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
-import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '@/components/ui/tooltip';
+} from "lucide-react";
 
-const navItems = [
-  { icon: LayoutDashboard, label: 'Dashboard', path: '/app', end: true },
-  { icon: Users, label: 'Customers', path: '/app/customers' },
-  { icon: Package, label: 'Assets', path: '/app/assets' },
-  { icon: Brain, label: 'AI Analysis', path: '/app/ai-analysis', badge: 'NEW' },
-  { icon: TicketCheck, label: 'Support Tickets', path: '/app/tickets', badge: '28' },
-  { icon: BarChart3, label: 'Reports', path: '/app/reports' },
-  { icon: Bell, label: 'Notifications', path: '/app/notifications', badge: '5' },
-  { icon: BookOpen, label: 'Knowledge Base', path: '/app/knowledge' },
-];
+import { cn } from "@/lib/utils";
+import { useAuth } from "@/contexts/AuthContext";
 
-const bottomItems = [
-  { icon: Settings, label: 'Settings', path: '/app/settings' },
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
+const navGroups = [
+  {
+    title: "GENERAL",
+    items: [
+      {
+        icon: LayoutDashboard,
+        label: "Dashboard",
+        path: "/app",
+        end: true,
+      },
+      {
+        icon: Users,
+        label: "Customers",
+        path: "/app/customers",
+      },
+      {
+        icon: Package,
+        label: "Assets",
+        path: "/app/assets",
+      },
+    ],
+  },
+
+  {
+    title: "AI",
+    items: [
+      {
+        icon: Brain,
+        label: "AI Analysis",
+        path: "/app/ai-analysis",
+        badge: "NEW",
+      },
+      {
+        icon: TicketCheck,
+        label: "Support Tickets",
+        path: "/app/tickets",
+        badge: "28",
+      },
+      {
+        icon: BarChart3,
+        label: "Reports",
+        path: "/app/reports",
+      },
+      {
+        icon: BookOpen,
+        label: "Knowledge Base",
+        path: "/app/knowledge",
+      },
+    ],
+  },
+
+  {
+    title: "SYSTEM",
+    items: [
+      {
+        icon: Bell,
+        label: "Notifications",
+        path: "/app/notifications",
+        badge: "5",
+      },
+      {
+        icon: Settings,
+        label: "Settings",
+        path: "/app/settings",
+      },
+    ],
+  },
 ];
 
 interface AppSidebarProps {
@@ -40,117 +104,165 @@ interface AppSidebarProps {
   onToggle: () => void;
 }
 
-export function AppSidebar({ collapsed, onToggle }: AppSidebarProps) {
+export function AppSidebar({
+  collapsed,
+  onToggle,
+}: AppSidebarProps) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate("/login");
   };
 
-  const initials = user?.name
-    .split(' ')
-    .map(n => n[0])
-    .join('')
-    .toUpperCase() || 'ZC';
+  const initials =
+    user?.name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase() || "ZC";
 
   return (
     <TooltipProvider delayDuration={300}>
       <motion.aside
-        animate={{ width: collapsed ? 64 : 240 }}
-        transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="fixed left-0 top-0 h-full z-30 flex flex-col glass-sidebar border-r border-sidebar-border overflow-hidden"
+        animate={{
+          width: collapsed ? 70 : 280,
+        }}
+        transition={{
+          duration: 0.25,
+        }}
+        className="
+          fixed
+          left-0
+          top-0
+          z-30
+          flex
+          h-full
+          flex-col
+          overflow-hidden
+          border-r
+          border-white/10
+          bg-gradient-to-b
+          from-slate-950
+          via-slate-900
+          to-slate-950
+          shadow-2xl
+        "
       >
         {/* Logo */}
-        <div className="flex items-center h-16 px-3 border-b border-sidebar-border shrink-0">
-          <div className="flex items-center gap-3 overflow-hidden">
-            <div className="flex items-center justify-center size-8 rounded-lg bg-primary shrink-0">
-              <Microscope className="size-4 text-primary-foreground" />
+
+        <div className="flex h-24 items-center border-b border-white/10 px-5">
+          <div className="flex items-center gap-4 overflow-hidden">
+            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 shadow-lg">
+              <Microscope className="h-6 w-6 text-white" />
             </div>
+
             <AnimatePresence>
               {!collapsed && (
                 <motion.div
-                  initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: 'auto' }}
-                  exit={{ opacity: 0, width: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="overflow-hidden whitespace-nowrap"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
                 >
-                  <span className="text-sm font-bold text-sidebar-foreground">CareSphere</span>
-                  <span className="text-xs text-sidebar-foreground/50 ml-1">AI</span>
+                  <h2 className="text-lg font-bold tracking-wide text-white">
+                    ZEISS
+                  </h2>
+
+                  <p className="text-sm text-slate-300">
+                    CareSphere AI
+                  </p>
+
+                  <p className="text-xs text-slate-500">
+                    Enterprise Platform
+                  </p>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
-          <button
-            onClick={onToggle}
-            className={cn(
-              'ml-auto flex items-center justify-center size-6 rounded-md text-sidebar-foreground/40 hover:text-sidebar-foreground hover:bg-sidebar-accent transition-colors shrink-0',
-              collapsed && 'hidden'
-            )}
-          >
-            <ChevronRight className="size-4" />
-          </button>
+
+          {!collapsed && (
+            <button
+              onClick={onToggle}
+              className="ml-auto flex h-7 w-7 items-center justify-center rounded-md text-slate-400 transition hover:bg-slate-800 hover:text-white"
+            >
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          )}
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto overflow-x-hidden py-3 px-2 space-y-0.5">
-          {navItems.map((item) => (
-            <SidebarNavItem
-              key={item.path}
-              {...item}
-              collapsed={collapsed}
-            />
+
+        <nav className="flex-1 overflow-y-auto px-3 py-5">
+                    {navGroups.map((group) => (
+            <div key={group.title} className="mb-6">
+              {!collapsed && (
+                <h3 className="mb-3 px-4 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">
+                  {group.title}
+                </h3>
+              )}
+
+              <div className="space-y-1">
+                {group.items.map((item) => (
+                  <SidebarNavItem
+                    key={item.path}
+                    {...item}
+                    collapsed={collapsed}
+                  />
+                ))}
+              </div>
+            </div>
           ))}
         </nav>
 
-        {/* Bottom items */}
-        <div className="px-2 pb-2 space-y-0.5 border-t border-sidebar-border pt-2">
-          {bottomItems.map((item) => (
-            <SidebarNavItem key={item.path} {...item} collapsed={collapsed} />
-          ))}
+        {/* User Card */}
 
-          {/* User profile */}
-          <div
-            className={cn(
-              'flex items-center gap-3 px-2 py-2 mt-1 rounded-lg hover:bg-sidebar-accent cursor-pointer transition-colors group',
-              collapsed && 'justify-center'
-            )}
-          >
-            <Avatar className="size-7 shrink-0">
-              <AvatarFallback className="bg-primary text-primary-foreground text-xs font-bold">
-                {initials}
-              </AvatarFallback>
-            </Avatar>
-            <AnimatePresence>
-              {!collapsed && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="flex-1 overflow-hidden min-w-0"
-                >
-                  <p className="text-xs font-semibold text-sidebar-foreground truncate">{user?.name}</p>
-                  <p className="text-xs text-sidebar-foreground/50 truncate capitalize">{user?.role}</p>
-                </motion.div>
+        <div className="mx-3 mb-4">
+          <Card className="border-white/10 bg-white/5 backdrop-blur-md shadow-lg">
+            <div
+              className={cn(
+                "flex items-center gap-3 p-4",
+                collapsed && "justify-center"
               )}
-            </AnimatePresence>
-            <AnimatePresence>
+            >
+              <Avatar className="h-11 w-11 border-2 border-blue-500">
+                <AvatarFallback className="bg-blue-600 font-bold text-white">
+                  {initials}
+                </AvatarFallback>
+              </Avatar>
+
               {!collapsed && (
-                <motion.button
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  onClick={handleLogout}
-                  className="size-6 flex items-center justify-center rounded-md text-sidebar-foreground/30 hover:text-destructive hover:bg-destructive/10 transition-colors opacity-0 group-hover:opacity-100"
-                  title="Logout"
-                >
-                  <LogOut className="size-3.5" />
-                </motion.button>
+                <>
+                  <div className="flex-1 overflow-hidden">
+                    <p className="truncate font-semibold text-white">
+                      {user?.name}
+                    </p>
+
+                    <p className="text-xs text-slate-400 capitalize">
+                      {user?.role}
+                    </p>
+
+                    <div className="mt-1 flex items-center gap-2">
+                      <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
+
+                      <span className="text-[11px] text-green-400">
+                        Online
+                      </span>
+                    </div>
+                  </div>
+
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={handleLogout}
+                    className="h-8 w-8 rounded-lg hover:bg-red-500/10 hover:text-red-400"
+                  >
+                    <LogOut className="h-4 w-4" />
+                  </Button>
+                </>
               )}
-            </AnimatePresence>
-          </div>
+            </div>
+          </Card>
         </div>
       </motion.aside>
     </TooltipProvider>
@@ -165,8 +277,14 @@ interface SidebarNavItemProps {
   collapsed: boolean;
   end?: boolean;
 }
-
-function SidebarNavItem({ icon: Icon, label, path, badge, collapsed, end }: SidebarNavItemProps) {
+function SidebarNavItem({
+  icon: Icon,
+  label,
+  path,
+  badge,
+  collapsed,
+  end,
+}: SidebarNavItemProps) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
@@ -175,11 +293,11 @@ function SidebarNavItem({ icon: Icon, label, path, badge, collapsed, end }: Side
           end={end}
           className={({ isActive }) =>
             cn(
-              'flex items-center gap-3 px-2 py-2 rounded-lg text-sm transition-all duration-150 group relative',
-              collapsed ? 'justify-center' : '',
+              "group relative flex items-center gap-4 rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200",
+              collapsed && "justify-center",
               isActive
-                ? 'bg-sidebar-accent text-sidebar-foreground font-medium'
-                : 'text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/60'
+                ? "border border-blue-500/30 bg-blue-500/15 text-white"
+                : "text-slate-400 hover:bg-slate-800/70 hover:text-white"
             )
           }
         >
@@ -188,11 +306,35 @@ function SidebarNavItem({ icon: Icon, label, path, badge, collapsed, end }: Side
               {isActive && (
                 <motion.div
                   layoutId="sidebar-active"
-                  className="absolute inset-0 bg-sidebar-accent rounded-lg"
-                  transition={{ duration: 0.2 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 450,
+                    damping: 35,
+                  }}
+                  className="absolute inset-0 rounded-xl border border-blue-500/30 bg-gradient-to-r from-blue-600/20 to-cyan-500/10 shadow-[0_0_20px_rgba(59,130,246,0.15)]"
                 />
               )}
-              <Icon className={cn('size-4 shrink-0 relative z-10', isActive ? 'text-primary' : '')} />
+
+              <motion.div
+                whileHover={{
+                  scale: 1.08,
+                  rotate: -3,
+                }}
+                transition={{
+                  duration: 0.2,
+                }}
+                className="relative z-10"
+              >
+                <Icon
+                  className={cn(
+                    "h-5 w-5",
+                    isActive
+                      ? "text-blue-400"
+                      : "text-slate-400 group-hover:text-white"
+                  )}
+                />
+              </motion.div>
+
               <AnimatePresence>
                 {!collapsed && (
                   <motion.span
@@ -205,10 +347,11 @@ function SidebarNavItem({ icon: Icon, label, path, badge, collapsed, end }: Side
                   </motion.span>
                 )}
               </AnimatePresence>
-              {badge && !collapsed && (
+
+              {!collapsed && badge && (
                 <Badge
                   variant="secondary"
-                  className="relative z-10 text-xs h-5 min-w-5 px-1.5 bg-primary/10 text-primary border-none"
+                  className="relative z-10 border-none bg-blue-500/20 px-2 py-0.5 text-[10px] font-semibold text-blue-400"
                 >
                   {badge}
                 </Badge>
@@ -217,10 +360,20 @@ function SidebarNavItem({ icon: Icon, label, path, badge, collapsed, end }: Side
           )}
         </NavLink>
       </TooltipTrigger>
+
       {collapsed && (
-        <TooltipContent side="right" className="font-medium">
-          {label}
-          {badge && <span className="ml-2 text-primary">({badge})</span>}
+        <TooltipContent side="right">
+          <div className="flex items-center gap-2">
+            <span>{label}</span>
+            {badge && (
+              <Badge
+                variant="secondary"
+                className="border-none bg-blue-500/20 text-blue-400"
+              >
+                {badge}
+              </Badge>
+            )}
+          </div>
         </TooltipContent>
       )}
     </Tooltip>

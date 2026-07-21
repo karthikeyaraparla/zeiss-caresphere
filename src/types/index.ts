@@ -214,3 +214,27 @@ export interface Ticket {
     };
   };
 }
+
+export interface AIAnalysisResult {
+  riskScore: number;
+
+  severity: string;
+
+  confidence: number;
+  
+  summary: string;               
+
+  likelyCause: string;
+
+  recommendation: string;
+
+  estimatedDowntime: string;
+
+  maintenancePriority: string;
+
+  engineerRequired: string;
+
+  partsNeeded: string[];
+
+  preventiveActions: string[];
+}
