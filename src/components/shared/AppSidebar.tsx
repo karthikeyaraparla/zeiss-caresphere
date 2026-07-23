@@ -22,6 +22,8 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import logo from "@/assets/logo.webp";
+
 
 import {
   Tooltip,
@@ -109,6 +111,7 @@ export function AppSidebar({
   onToggle,
 }: AppSidebarProps) {
   const { user, logout } = useAuth();
+  const isAdmin = user?.role === "admin";
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -122,6 +125,22 @@ export function AppSidebar({
       .map((n) => n[0])
       .join("")
       .toUpperCase() || "ZC";
+
+  const visibleNavGroups = navGroups
+  .map((group) => ({
+    ...group,
+    items: group.items.filter((item) => {
+      if (isAdmin) return true;
+
+      return [
+        "/app",
+        "/app/assets",
+        "/app/tickets",
+        "/app/knowledge",
+      ].includes(item.path);
+    }),
+  }))
+  .filter((group) => group.items.length > 0);
 
   return (
     <TooltipProvider delayDuration={300}>
@@ -155,8 +174,12 @@ export function AppSidebar({
         <div className="flex h-24 items-center border-b border-white/10 px-5">
           <div className="flex items-center gap-4 overflow-hidden">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 shadow-lg">
-              <Microscope className="h-6 w-6 text-white" />
-            </div>
+    <img
+        src={logo}
+        alt="Logo"
+        className="h-8 w-8 object-contain"
+    />
+</div>
 
             <AnimatePresence>
               {!collapsed && (
@@ -170,7 +193,7 @@ export function AppSidebar({
                   </h2>
 
                   <p className="text-sm text-slate-300">
-                    CareSphere AI
+                    ZePSI
                   </p>
 
                   <p className="text-xs text-slate-500">
@@ -194,7 +217,7 @@ export function AppSidebar({
         {/* Navigation */}
 
         <nav className="flex-1 overflow-y-auto px-3 py-5">
-                    {navGroups.map((group) => (
+                    {visibleNavGroups.map((group) => (
             <div key={group.title} className="mb-6">
               {!collapsed && (
                 <h3 className="mb-3 px-4 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500">
@@ -252,13 +275,13 @@ export function AppSidebar({
                   </div>
 
                   <Button
-                    variant="ghost"
-                    size="icon"
-                    onClick={handleLogout}
-                    className="h-8 w-8 rounded-lg hover:bg-red-500/10 hover:text-red-400"
-                  >
-                    <LogOut className="h-4 w-4" />
-                  </Button>
+  variant="ghost"
+  size="icon"
+  onClick={handleLogout}
+  className="h-8 w-8 rounded-lg text-white hover:bg-red-500/10 hover:text-red-400"
+>
+  <LogOut className="h-4 w-4" />
+</Button>
                 </>
               )}
             </div>
@@ -338,13 +361,18 @@ function SidebarNavItem({
               <AnimatePresence>
                 {!collapsed && (
                   <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="relative z-10 flex-1 truncate"
-                  >
-                    {label}
-                  </motion.span>
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  exit={{ opacity: 0 }}
+  className={cn(
+    "relative z-10 flex-1 truncate",
+    isActive
+      ? "text-white"
+      : "text-white group-hover:text-white"
+  )}
+>
+  {label}
+</motion.span>
                 )}
               </AnimatePresence>
 

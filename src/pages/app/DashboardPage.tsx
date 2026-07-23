@@ -51,12 +51,6 @@ export default function DashboardPage() {
         title="Dashboard"
         subtitle="Overview of your asset monitoring and AI analysis platform"
         icon={<TrendingUp className="size-5" />}
-        actions={
-          <Button size="sm" className="gap-1.5">
-            <Brain className="size-4" />
-            Run Bulk Analysis
-          </Button>
-        }
       />
 
       {/* Metrics grid */}

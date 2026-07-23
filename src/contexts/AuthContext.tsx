@@ -131,6 +131,7 @@ export function AuthProvider({
         email,
         password,
       });
+      console.log("Signup Response:", data);
 
       if (error) {
         setIsLoading(false);
@@ -152,8 +153,9 @@ export function AuthProvider({
           });
 
         if (profileError) {
-          console.error("Profile Creation Error:", profileError);
-        }
+  console.error("Profile Creation Error:", profileError);
+  alert(JSON.stringify(profileError, null, 2));
+}
       }
 
       const {

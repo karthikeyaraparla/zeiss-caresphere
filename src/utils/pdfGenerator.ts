@@ -15,7 +15,7 @@ export function generateAIReport(
 
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(20);
-  doc.text("ZEISS CareSphere AI", 14, 14);
+  doc.text("ZEISS ZePSI AI", 14, 14);
 
   doc.setFontSize(10);
   doc.text("Predictive Maintenance Report", 14, 19);
@@ -82,7 +82,7 @@ export function generateAIReport(
   doc.setTextColor(120);
 
   doc.text(
-    "Generated using CareSphere AI powered by Gemini",
+    "Generated using ZePSI AI powered by Gemini",
     14,
     285
   );

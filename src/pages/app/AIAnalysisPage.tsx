@@ -165,7 +165,7 @@ async function handleAnalyze() {
     disabled={loading || !selectedTicketId}
     className="w-full"
   >
-    {loading ? "Analyzing..." : "Analyze with Gemini"}
+    {loading ? "Analyzing..." : "Analyze"}
   </Button>
 
   {loading && (

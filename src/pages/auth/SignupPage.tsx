@@ -52,7 +52,7 @@ export default function SignupPage() {
             <div className="flex items-center justify-center size-8 rounded-lg bg-primary">
               <Microscope className="size-4 text-primary-foreground" />
             </div>
-            <span className="text-foreground">ZEISS CareSphere AI</span>
+            <span className="text-foreground">ZEISS ZePSI AI</span>
           </Link>
 
           <div className="mb-8">
@@ -177,7 +177,7 @@ export default function SignupPage() {
           <div className="flex items-center justify-center size-8 rounded-lg bg-primary-foreground/20">
             <Microscope className="size-4 text-primary-foreground" />
           </div>
-          <span className="text-primary-foreground text-lg">ZEISS CareSphere AI</span>
+          <span className="text-primary-foreground text-lg">ZEISS ZePSI AI</span>
         </Link>
 
         <div className="relative z-10 flex-1 flex flex-col justify-center max-w-sm">

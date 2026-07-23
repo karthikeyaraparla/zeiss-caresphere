@@ -38,7 +38,7 @@ export function LandingFooter() {
                 <Microscope className="size-4 text-primary-foreground" />
               </div>
               <span className="text-foreground">
-                ZEISS <span className="text-primary">CareSphere</span>
+                ZEISS <span className="text-primary">ZePSI</span>
               </span>
               <span className="text-xs font-medium bg-primary/10 text-primary border border-primary/20 px-1.5 py-0.5 rounded">AI</span>
             </div>
