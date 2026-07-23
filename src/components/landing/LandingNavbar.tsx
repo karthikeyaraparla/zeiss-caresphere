@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Microscope, Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Menu, X } from "lucide-react";import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/mode-toggle';
 import { cn } from '@/lib/utils';
+import logo from "@/components/assets/logo.png";
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -47,14 +47,18 @@ export function LandingNavbar() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 font-bold">
           <motion.div
-            animate={{ scale: scrolled ? 0.85 : 1 }}
-            transition={{ duration: 0.3 }}
-            className="flex items-center justify-center size-8 rounded-lg bg-primary"
-          >
-            <Microscope className="size-4 text-primary-foreground" />
-          </motion.div>
+  animate={{ scale: scrolled ? 0.85 : 1 }}
+  transition={{ duration: 0.3 }}
+  className="flex items-center justify-center size-8 rounded-lg bg-primary p-1"
+>
+  <img
+    src={logo}
+    alt="ZePSI Logo"
+    className="h-full w-full object-contain"
+  />
+</motion.div>
           <span className="text-foreground">
-            ZEISS <span className="text-primary">CareSphere</span>
+            ZEISS <span className="text-primary">ZePSI</span>
           </span>
           <span className="text-xs font-medium bg-primary/10 text-primary border border-primary/20 px-1.5 py-0.5 rounded">AI</span>
         </Link>

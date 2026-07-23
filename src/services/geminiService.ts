@@ -25,6 +25,7 @@ Respond ONLY in JSON.
   "riskScore": 0,
   "severity": "Low | Medium | High | Critical",
   "confidence": 0,
+  "summary": "",
   "likelyCause": "",
   "recommendation": "",
   "estimatedDowntime": "",

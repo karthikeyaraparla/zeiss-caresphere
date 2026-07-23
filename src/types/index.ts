@@ -1,4 +1,4 @@
-// Type definitions for ZEISS CareSphere AI
+// Type definitions for ZEISS ZePSI
 
 export type RiskLevel = 'critical' | 'high' | 'medium' | 'low';
 export type TicketStatus = 'open' | 'in_progress' | 'resolved' | 'closed';
@@ -221,7 +221,7 @@ export interface AIAnalysisResult {
   severity: string;
 
   confidence: number;
-  
+
   summary: string;               
 
   likelyCause: string;

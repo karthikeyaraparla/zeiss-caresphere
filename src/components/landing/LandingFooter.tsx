@@ -84,7 +84,7 @@ export function LandingFooter() {
         <Separator className="my-8" />
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <p>© {new Date().getFullYear()} ZEISS CareSphere AI. Built for Carl ZEISS Innovate @2030 Hackathon.</p>
+          <p>© {new Date().getFullYear()} ZEISS ZePSI. Built for Carl ZEISS Innovate @2030 Hackathon.</p>
           <div className="flex items-center gap-4">
             <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-foreground transition-colors">Terms of Service</a>

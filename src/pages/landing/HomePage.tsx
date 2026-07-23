@@ -133,13 +133,13 @@ const testimonials = [
   {
     name: 'Prof. James Morrison',
     role: 'Director of Research, Stanford University',
-    content: 'CareSphere AI predicted our LSM 980 failure 6 weeks before it occurred. The ROI from avoided downtime has been extraordinary.',
+    content: 'ZePSI predicted our LSM 980 failure 6 weeks before it occurred. The ROI from avoided downtime has been extraordinary.',
     rating: 5,
   },
   {
     name: 'Yuki Tanaka',
     role: 'VP Operations, Advanced Semiconductor Corp',
-    content: 'With 24 ZEISS instruments across our cleanrooms, manual tracking was impossible. CareSphere AI transformed our entire maintenance strategy.',
+    content: 'With 24 ZEISS instruments across our cleanrooms, manual tracking was impossible. ZePSI transformed our entire maintenance strategy.',
     rating: 5,
   },
   {
@@ -399,7 +399,7 @@ export default function HomePage() {
               Start predicting failures today
             </h2>
             <p className="text-xl text-primary-foreground/80 mb-10 leading-relaxed">
-              Join 847+ enterprise customers who use ZEISS CareSphere AI to prevent costly downtime and optimize equipment performance.
+              Join 847+ enterprise customers who use ZEISS ZePSI to prevent costly downtime and optimize equipment performance.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link to="/signup">

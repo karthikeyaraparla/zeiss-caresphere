@@ -26,7 +26,7 @@ export default function TechnologyPage() {
               Built on <span className="gradient-text">world-class technology</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              CareSphere AI leverages the most advanced technologies available to deliver enterprise-grade reliability, security, and performance.
+              ZePSI leverages the most advanced technologies available to deliver enterprise-grade reliability, security, and performance.
             </p>
           </motion.div>
 

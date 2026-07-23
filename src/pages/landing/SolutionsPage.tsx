@@ -52,7 +52,7 @@ export default function SolutionsPage() {
               Solutions for <span className="gradient-text">every challenge</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              CareSphere AI addresses the complete spectrum of enterprise equipment management challenges with intelligent, AI-powered solutions.
+              ZePSI addresses the complete spectrum of enterprise equipment management challenges with intelligent, AI-powered solutions.
             </p>
           </motion.div>
 

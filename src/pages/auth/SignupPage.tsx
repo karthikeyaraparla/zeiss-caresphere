@@ -4,13 +4,14 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Microscope, Eye, EyeOff, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Eye, EyeOff, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/contexts/AuthContext';
 import { Spinner } from '@/components/shared/LoadingSkeleton';
 import { cn } from '@/lib/utils';
+import logo from "@/components/assets/logo.png";
 
 const schema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -49,10 +50,14 @@ export default function SignupPage() {
           className="w-full max-w-md"
         >
           <Link to="/" className="flex items-center gap-2.5 font-bold mb-8 lg:hidden">
-            <div className="flex items-center justify-center size-8 rounded-lg bg-primary">
-              <Microscope className="size-4 text-primary-foreground" />
-            </div>
-            <span className="text-foreground">ZEISS ZePSI AI</span>
+            <div className="flex items-center justify-center size-8 rounded-lg bg-primary p-1">
+  <img
+    src={logo}
+    alt="ZePSI Logo"
+    className="h-full w-full object-contain"
+  />
+</div>
+            <span className="text-foreground">ZEISS ZePSI</span>
           </Link>
 
           <div className="mb-8">
@@ -174,10 +179,14 @@ export default function SignupPage() {
         <div className="absolute inset-0 grid-bg opacity-20" />
 
         <Link to="/" className="relative flex items-center gap-2.5 font-bold z-10">
-          <div className="flex items-center justify-center size-8 rounded-lg bg-primary-foreground/20">
-            <Microscope className="size-4 text-primary-foreground" />
-          </div>
-          <span className="text-primary-foreground text-lg">ZEISS ZePSI AI</span>
+         <div className="flex items-center justify-center size-8 rounded-lg bg-primary-foreground/20 p-1">
+  <img
+    src={logo}
+    alt="ZePSI Logo"
+    className="h-full w-full object-contain"
+  />
+</div>
+          <span className="text-primary-foreground text-lg">ZEISS ZePSI</span>
         </Link>
 
         <div className="relative z-10 flex-1 flex flex-col justify-center max-w-sm">

@@ -11,7 +11,7 @@ const features = [
   {
     icon: Brain,
     title: 'Gemini AI Integration',
-    desc: 'Powered by Google\'s most advanced Gemini AI model, CareSphere analyzes complex asset data patterns and generates actionable predictive insights with industry-leading 96% accuracy.',
+    desc: 'Powered by Google\'s most advanced Gemini AI model, ZePSI analyzes complex asset data patterns and generates actionable predictive insights with industry-leading 96% accuracy.',
     highlights: ['Natural language analysis', 'Context-aware recommendations', 'Continuous learning', 'Multi-modal data processing'],
     color: 'text-primary bg-primary/10',
   },
@@ -65,7 +65,7 @@ export default function FeaturesPage() {
               Every feature you need to <span className="gradient-text">prevent failures</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              CareSphere AI combines cutting-edge artificial intelligence with enterprise asset management to deliver the most comprehensive predictive maintenance platform available.
+              ZePSI AI combines cutting-edge artificial intelligence with enterprise asset management to deliver the most comprehensive predictive maintenance platform available.
             </p>
           </motion.div>
         </div>

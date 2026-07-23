@@ -25,11 +25,11 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const faqs = [
-  { q: 'How does AI analysis work?', a: 'ZePSI AI uses Google Gemini to analyze asset specifications, usage history, maintenance records, and failure patterns to generate predictive risk assessments.' },
+  { q: 'How does AI analysis work?', a: 'ZePSI uses Google Gemini to analyze asset specifications, usage history, maintenance records, and failure patterns to generate predictive risk assessments.' },
   { q: 'How accurate are the predictions?', a: 'Our AI achieves 96% accuracy in predicting equipment failures more than 2 weeks in advance, validated across 50,000+ historical service records.' },
-  { q: 'Do I need IoT sensors?', a: 'No. ZePSI AI is designed for manual asset management. You register assets and input data manually, and AI does the analysis without any IoT connectivity.' },
+  { q: 'Do I need IoT sensors?', a: 'No. ZePSI is designed for manual asset management. You register assets and input data manually, and AI does the analysis without any IoT connectivity.' },
   { q: 'How long does onboarding take?', a: 'Most customers are fully onboarded within 2 business days. Our team provides dedicated support throughout the setup process.' },
-  { q: 'Is my data secure?', a: 'Yes. ZePSI AI is SOC 2 Type II certified, uses end-to-end encryption, and your data never leaves your designated data region.' },
+  { q: 'Is my data secure?', a: 'Yes. ZePSI is SOC 2 Type II certified, uses end-to-end encryption, and your data never leaves your designated data region.' },
   { q: 'Can I export reports?', a: 'Yes. All reports can be exported as PDF, CSV, or Excel. You can also schedule automatic report delivery via email.' },
 ];
 

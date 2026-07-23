@@ -9,7 +9,7 @@ const timeline = [
   { year: '2020', event: 'Problem Identified', desc: 'ZEISS field engineers reported increasing cases of unexpected equipment failures causing significant customer downtime.' },
   { year: '2021', event: 'Research Phase', desc: 'Deep analysis of 50,000+ service records reveals predictable failure patterns detectable weeks in advance.' },
   { year: '2022', event: 'AI Prototype', desc: 'First AI model trained on historical maintenance data achieves 84% failure prediction accuracy.' },
-  { year: '2023', event: 'Platform Launch', desc: 'CareSphere AI beta launch with 50 enterprise customers. Risk scoring engine achieves 91% accuracy.' },
+  { year: '2023', event: 'Platform Launch', desc: 'ZePSI beta launch with 50 enterprise customers. Risk scoring engine achieves 91% accuracy.' },
   { year: '2024', event: 'Gemini Integration', desc: 'Integration with Google Gemini AI boosts prediction accuracy to 96%. Platform reaches 500+ customers.' },
   { year: '2030', event: 'ZEISS Vision', desc: 'Full IoT integration, digital twins, and autonomous maintenance scheduling across the entire ZEISS equipment ecosystem.' },
 ];
@@ -29,7 +29,7 @@ export default function AboutPage() {
               The future of <span className="gradient-text">equipment intelligence</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              ZEISS CareSphere AI was built for the Carl ZEISS Innovate @2030 Hackathon to reimagine how enterprises manage, monitor, and maintain their most critical equipment.
+              ZEISS ZePSI was built for the Carl ZEISS Innovate @2030 Hackathon to reimagine how enterprises manage, monitor, and maintain their most critical equipment.
             </p>
           </motion.div>
 

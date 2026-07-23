@@ -15,10 +15,10 @@ const customers = [
 ];
 
 const testimonials = [
-  { name: 'Prof. James Morrison', role: 'Director, Stanford Research Institute', content: 'CareSphere AI predicted our LSM 980 failure 6 weeks before it occurred. The estimated savings from avoided downtime was over $180,000.', rating: 5 },
-  { name: 'Yuki Tanaka', role: 'VP Operations, Advanced Semiconductor Corp', content: 'With 24 ZEISS instruments across our cleanrooms, CareSphere AI transformed our entire maintenance strategy. 73% reduction in unplanned downtime.', rating: 5 },
+  { name: 'Prof. James Morrison', role: 'Director, Stanford Research Institute', content: 'ZePSI predicted our LSM 980 failure 6 weeks before it occurred. The estimated savings from avoided downtime was over $180,000.', rating: 5 },
+  { name: 'Yuki Tanaka', role: 'VP Operations, Advanced Semiconductor Corp', content: 'With 24 ZEISS instruments across our cleanrooms, ZePSI transformed our entire maintenance strategy. 73% reduction in unplanned downtime.', rating: 5 },
   { name: 'Dr. Sarah Chen', role: 'CTO, MedTech Solutions GmbH', content: 'The AI analysis reports are incredibly detailed. Our service engineers arrive perfectly prepared. It\'s like having a crystal ball for equipment failures.', rating: 5 },
-  { name: 'Dr. Ahmed Hassan', role: 'Medical Director, Cairo Eye Center', content: 'For our ophthalmology practice, equipment downtime directly impacts patient care. CareSphere AI has given us peace of mind and better outcomes.', rating: 5 },
+  { name: 'Dr. Ahmed Hassan', role: 'Medical Director, Cairo Eye Center', content: 'For our ophthalmology practice, equipment downtime directly impacts patient care. ZePSI has given us peace of mind and better outcomes.', rating: 5 },
 ];
 
 const industries = [
@@ -42,7 +42,7 @@ export default function CustomersLandingPage() {
               Trusted by <span className="gradient-text">global enterprises</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              847+ enterprises across 45 countries use ZEISS CareSphere AI to protect their equipment investments and prevent costly failures.
+              847+ enterprises across 45 countries use ZEISS ZePSI to protect their equipment investments and prevent costly failures.
             </p>
           </motion.div>
 
